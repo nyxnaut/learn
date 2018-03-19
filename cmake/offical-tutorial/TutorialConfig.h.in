@@ -1,8 +1,0 @@
-// @...@ will be replaced by the value from CMakeLists.txt
-#define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@
-#define Tutorial_VERSION_MINOR @Tutorial_VERSION_MAJOR@
-
-// exposes USE_MYMATH for use in source files
-#cmakedefine USE_MYMATH
-#cmakedefine HAVE_LOG
-#cmakedefine HAVE_EXP
