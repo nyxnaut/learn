@@ -1,0 +1,80 @@
+<!-- source: https://developers.google.com/web/fundamentals/web-components/customelements#intro -->
+<template>
+    <!-- the <p> styling recolors a <p> in <slot> if polyfilled, but not in native shadow dom -->
+    <style>
+        h1 {
+            color: blueviolet;
+        }
+        p {
+            color: bisque;
+        }
+    </style>
+    <div>
+        <h1>Test</h1>
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+(() => {
+    const template = document.currentScript.ownerDocument.querySelector('template')
+    class AppDrawer extends HTMLElement {
+        constructor() {
+            super()
+            this.addEventListener('click', e => {
+                if (this.disabled) {
+                    return
+                }
+                this.toggleDrawer()
+            })
+            const shadowRoot = this.attachShadow({mode: "open"})
+            shadowRoot.appendChild(template.content.cloneNode(true))
+        }
+        // anything here will fire attributeChangedCallback
+        static get observedAttributes() {
+            return ['disabled', 'open']
+        }
+        //TODO: Are we doing something with open?
+        // can also keep attribute in sync this way, but do we still
+        // need the getter and setter then? just getter?
+        attributeChangedCallback(name, oldVal, newVal) {
+            if (this.disabled) {
+                this.setAttribute('tabindex', '-1')
+                this.setAttribute('aria-disabled', 'true')
+            } else {
+                this.setAttribute('tabindex', '0')
+                this.setAttribute('aria-disabled', 'false')
+            }
+        }
+
+        // connectedCallback(){}
+
+        // don't rely on this being called, if user closes tab it won't run
+        // disconnectedCallback(){}
+        get open() {
+            return this.hasAttribute('open')
+        }
+        set open(val) {
+            if (val) {
+                this.setAttribute('open', '')
+            } else {
+                this.removeAttribute('open')
+            }
+            this.toggleDrawer()
+        }
+        get disabled() {
+            return this.hasAttribute('disabled')
+        }
+        set disabled(val) {
+            if (val) {
+                this.setAttribute('open', '')
+            } else {
+                this.removeAttribute('open')
+            }
+            // TODO: make sure this will close when disabled
+            this.toggleDrawer()
+        }
+    }
+    window.customElements.define('app-drawer', AppDrawer)
+})()
+</script>
