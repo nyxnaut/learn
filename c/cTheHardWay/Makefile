@@ -4,4 +4,4 @@ CFLAGS=-Wall -g
 .PHONY: clean all
 clean:
 	rm -f ex?
-all: ex1 ex3
+all: ex1 ex3 ex7
