@@ -1,0 +1,12 @@
+Not a rigorous proof:
+
+median (x) is defined by the middle of an ordered set of numbers.
+
+Any attempt to track a subset of the set of values (n) only requires that the
+unknown, to-be-added values all exist on one side (higher or lower) than the 
+current median's index (i) such that:
+
+newValuesHigher > newValuesLower + x - i + 1 (with higher and lower being interchangable)
+
+Assumes the case of a symmetrically tracked subset and the new values differing
+from the original. 
