@@ -17,7 +17,7 @@ using std::streamsize;
 using std::vector;
 using std::sort;
 
-istream& read_hw(istream& in, vector<double>& hw);
+void read_hw(istream& in, vector<double>& hw);
 
 double grade(double midterm, double final, double homework);
 double grade(double midterm, double final, const vector<double>& hw);
@@ -36,10 +36,8 @@ int main() {
   cout << "Enter all your homework grades followed by EOF";
 
   vector<double> homework;
-  double x;
 
-  while (cin >> x)
-    homework.push_back(x);
+  read_hw(cin, homework);
 
   try {
     // run the code that could cause exception first so that the stream precision isn't a side
@@ -59,7 +57,7 @@ int main() {
   return 0;
 }
 
-istream& read_hw(istream& in, vector<double>& hw) {
+void read_hw(istream& in, vector<double>& hw) {
   if(in) {
     hw.clear();
     double x;
@@ -67,7 +65,6 @@ istream& read_hw(istream& in, vector<double>& hw) {
       hw.push_back(x);
     in.clear();
   }
-  return in;
 }
 
 double grade(double midterm, double final, const vector<double>& hw) {
