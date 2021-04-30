@@ -16,53 +16,55 @@ using std::string;
 using std::streamsize;
 using std::vector;
 using std::sort;
-
-istream& read_hw(istream& in, vector<double>& hw);
-
-double grade(double midterm, double final, double homework);
-double grade(double midterm, double final, const vector<double>& hw);
-double median(vector<double> vec);
+using std::max;
 
 struct Student_info {
   string name;
   double midterm, final;
   vector<double> homework;
-}
+};
+
+istream& read(istream& in, Student_info& student);
+istream& read_hw(istream& in, vector<double>& hw);
+
+double grade(const Student_info& student);
+double grade(double midterm, double final, double homework);
+double grade(double midterm, double final, const vector<double>& hw);
+double median(vector<double> vec);
+
+bool compare(const Student_info& x, const Student_info& y);
 
 int main() {
-  cout << "Please enter your first name: ";
-  string name;
-  cin >> name;
-  cout << "Hello, " << name << "!" << endl;
+  vector<Student_info> students;
+  Student_info student;
+  string::size_type maxlen = 0;
 
-  cout <<  "Please enter your midterm and final exam grades: ";
-  double midterm, final;
-  cin >> midterm >> final;
-
-  cout << "Enter all your homework grades followed by EOF";
-
-  vector<double> homework;
-  double x;
-
-  while (cin >> x)
-    homework.push_back(x);
-
-  try {
-    // run the code that could cause exception first so that the stream precision isn't a side
-    // effect of an exception
-    const double final_grade = grade(midterm, final, homework);
-
-    // find the default stream precision
-    streamsize prec = cout.precision();
-    cout << "Your final grade is " << setprecision(3) // set stream precision to 3
-      << final_grade
-      << setprecision(prec) << endl; // reset stream precision to default
-  } catch (std::domain_error) {
-    cout << endl << "You must enter your grades. Please try again" << endl;
-    return 1;
+  while(read(cin, student)){
+    maxlen = max(maxlen, student.name.size());
+    students.push_back(student);
   }
 
+  sort(students.begin(), students.end(), compare);
+
+  for(auto& student : students) {
+    cout << student.name << string(maxlen + 1 - student.name.size(), ' ');
+    try {
+      double final_grade = grade(student);
+
+      streamsize prec = cout.precision();
+      cout << setprecision(3) << final_grade << setprecision(prec) << endl;
+    } catch (std::domain_error e) {
+      cout << e.what() << endl;
+      return 1;
+    }
+  }
   return 0;
+}
+
+istream& read(istream& in, Student_info& student) {
+  in >> student.name >> student.midterm >> student.final;
+  read_hw(in, student.homework);
+  return in;
 }
 
 istream& read_hw(istream& in, vector<double>& hw) {
@@ -74,6 +76,10 @@ istream& read_hw(istream& in, vector<double>& hw) {
     in.clear();
   }
   return in;
+}
+
+double grade(const Student_info& student) {
+  return grade(student.midterm, student.final, student.homework);
 }
 
 double grade(double midterm, double final, const vector<double>& hw) {
@@ -100,3 +106,6 @@ double median(vector<double> vec) {
   return size % 2 == 0 ? (vec[mid] + vec[mid-1]) / 2 : vec[mid];
 }
 
+bool compare(const Student_info& x, const Student_info& y) {
+  return x.name < y.name;
+}
