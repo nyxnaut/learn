@@ -1,0 +1,3 @@
+The suggested code change in the problem did not compile. max is not able to
+compare values of two different types (how would it know?). To fix the problem 
+revert maxlen to string::size_type.

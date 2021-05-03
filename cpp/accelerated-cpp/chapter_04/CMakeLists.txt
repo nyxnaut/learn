@@ -6,6 +6,7 @@ add_library(Student_info Student_info.cc)
 add_library(grade grade.cc)
 
 add_executable(function_compute_grades function_compute_grades.cc)
+add_executable(grade_many_students grade_many_students.cc)
 add_executable(grade_split_files grade_split_files.cc)
 
 target_link_libraries(grade
