@@ -1,0 +1,8 @@
+If the following code is legal what can we infer about the return type of f?
+
+double d = f()[n];
+
+By the array access '[n]' we know the return value is a container, though not what type. It could
+be a fixed or dynamic (vector) array (from the perspective of what has been covered in the book).
+We also know the container holds values implicitly convertable to double. If the value is larger
+than a double, data loss may occur. 
