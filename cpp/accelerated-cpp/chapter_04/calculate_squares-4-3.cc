@@ -12,12 +12,12 @@ using std::setw;
 
 
 int main() {
-	int i = 100;
+	int i = 10000;
 	int power = i * i;
 	string::size_type length = to_string(power).length() + 2;
 	cout << setw(length) << "Number" << setw(length) << "Power" << endl;
 
-	for(i = 1; i <= 100; i++) {
+	for(int i = 1; i < 10000; i++) {
 		power = i * i;
 		cout << setw(length) << i << setw(length) << power << endl;
 	}
