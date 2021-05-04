@@ -11,6 +11,7 @@ add_executable(grade_split_files grade_split_files.cc)
 
 add_executable(calculate_squares-4-2 calculate_squares-4-2.cc)
 add_executable(calculate_squares-4-3 calculate_squares-4-3.cc)
+add_executable(calculate_squares-4-4 calculate_squares-4-4.cc)
 
 target_link_libraries(grade
 	PRIVATE Student_info median)
