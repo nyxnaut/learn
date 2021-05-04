@@ -9,6 +9,8 @@ add_executable(function_compute_grades function_compute_grades.cc)
 add_executable(grade_many_students grade_many_students.cc)
 add_executable(grade_split_files grade_split_files.cc)
 
+add_executable(calculate_squares-4-2 calculate_squares-4-2.cc)
+
 target_link_libraries(grade
 	PRIVATE Student_info median)
 
