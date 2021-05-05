@@ -18,15 +18,27 @@ target_link_libraries(grade_split_files
 
 # Homework
 add_library(read_words-4-5 read_words-4-5.cc)
+add_library(Student_info-4-6 Student_info-4-6.cc)
+add_library(grade-4-6 grade-4-6.cc)
 
 add_executable(calculate_squares-4-2 calculate_squares-4-2.cc)
 add_executable(calculate_squares-4-3 calculate_squares-4-3.cc)
 add_executable(calculate_squares-4-4 calculate_squares-4-4.cc)
 add_executable(word_count-4-5 word_count-4-5.cc)
 add_executable(word_frequency-4-5 word_frequency-4-5.cc)
+add_executable(grade_split_files-4-6 grade_split_files-4-6.cc)
 
 target_link_libraries(word_count-4-5
 	PRIVATE read_words-4-5)
 
 target_link_libraries(word_frequency-4-5
 	PRIVATE read_words-4-5)
+
+target_link_libraries(grade_split_files-4-6
+	PRIVATE Student_info-4-6)
+
+target_link_libraries(Student_info-4-6
+	PRIVATE grade-4-6)
+
+target_link_libraries(grade-4-6
+	PRIVATE median)
