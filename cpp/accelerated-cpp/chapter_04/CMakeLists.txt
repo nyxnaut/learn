@@ -27,6 +27,7 @@ add_executable(calculate_squares-4-4 calculate_squares-4-4.cc)
 add_executable(word_count-4-5 word_count-4-5.cc)
 add_executable(word_frequency-4-5 word_frequency-4-5.cc)
 add_executable(grade_split_files-4-6 grade_split_files-4-6.cc)
+add_executable(find_average-4-7 find_average-4-7.cc)
 
 target_link_libraries(word_count-4-5
 	PRIVATE read_words-4-5)
