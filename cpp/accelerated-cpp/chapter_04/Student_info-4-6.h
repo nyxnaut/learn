@@ -6,6 +6,7 @@
 #include <vector>
 
 struct Student_info {
+  Student_info() : grade(0) {}
   std::string name;
   double grade;
 };

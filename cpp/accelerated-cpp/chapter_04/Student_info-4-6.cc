@@ -13,13 +13,15 @@ bool compare(const Student_info& x, const Student_info& y) {
 }
 
 istream& read(istream& in, Student_info& student) {
-  double midterm, final;
+  double midterm, finalExam;
   vector<double> homework;
 
-  in >> student.name >> midterm >> final;
+  in >> student.name >> midterm >> finalExam;
   read_hw(in, homework);
 
-  student.grade = grade(midterm, final, homework);
+
+  if (homework.size() > 0)
+    student.grade = grade(midterm, finalExam, homework);
   return in;
 }
 
