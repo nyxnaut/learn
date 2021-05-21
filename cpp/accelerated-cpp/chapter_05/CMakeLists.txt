@@ -4,6 +4,8 @@ project(Accelerated_Cpp_Ch_05 LANGUAGES CXX)
 # Examples
 add_library(c_grade grade.cc)
 add_library(split split.cc)
+add_library(max_width max_width.cc)
+add_library(frame frame.cc)
 
 add_executable(categorize_students categorize_students.cc)
 add_executable(split_standalone split.cc)
