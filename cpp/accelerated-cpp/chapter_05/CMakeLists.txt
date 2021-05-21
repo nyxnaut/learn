@@ -3,8 +3,10 @@ project(Accelerated_Cpp_Ch_05 LANGUAGES CXX)
 
 # Examples
 add_library(c_grade grade.cc)
+add_library(split split.cc)
 
 add_executable(categorize_students categorize_students.cc)
+add_executable(split_standalone split.cc)
 
 target_link_libraries(c_grade
 	PRIVATE Student_info median)
